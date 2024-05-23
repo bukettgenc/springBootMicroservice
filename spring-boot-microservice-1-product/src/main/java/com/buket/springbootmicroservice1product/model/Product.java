@@ -11,22 +11,21 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
-@Table(name="product")
 @Data
-public class Product {
+@Entity
+@Table(name = "product")
+public class Product
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(name="name",length=100,nullable=false)
-	private String name;
-	
-	@Column(name="price",nullable=false)
-	private String price;
-	
-	@Column(name="created_time",nullable=false)
-	private LocalDateTime createdTime;
-	
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
+
+    @Column(name = "price", nullable = false)
+    private Double price;
+
+    @Column(name = "create_time", nullable = false)
+    private LocalDateTime createTime;
 }

@@ -7,25 +7,31 @@ import com.buket.springbootmicroservice1product.model.Product;
 import com.buket.springbootmicroservice1product.repository.IProductRepository;
 
 @Service
-public class ProductService implements IProductService {
+public class ProductService implements IProductService
+{
+    private final IProductRepository productRepository;
 
-	private final IProductRepository iProductRepository;
+    public ProductService(IProductRepository productRepository)
+    {
+        this.productRepository = productRepository;
+    }
 
-	public ProductService(IProductRepository iProductRepository) {
-		this.iProductRepository = iProductRepository;
-	}
+    @Override
+    public Product saveProduct(Product product)
+    {
+        product.setCreateTime(LocalDateTime.now());
+        return productRepository.save(product);
+    }
 
-	public Product saveProduct(Product product) {
-		product.setCreatedTime(LocalDateTime.now());
-		return iProductRepository.save(product);
-	}
+    @Override
+    public void deleteProduct(Long productId)
+    {
+        productRepository.deleteById(productId);
+    }
 
-	public void deleteProduct(Long productId) {
-		iProductRepository.deleteById(productId);
-	}
-
-	public List<Product> findAllProducts() {
-		return iProductRepository.findAll();
-	}
-
+    @Override
+    public List<Product> findAllProducts()
+    {
+        return productRepository.findAll();
+    }
 }
